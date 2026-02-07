@@ -86,7 +86,9 @@ CREATE TABLE USERS (
     user_name VARCHAR(100) NOT NULL,
     mobile_number VARCHAR(10) NOT NULL,
     address VARCHAR(200) NOT NULL,
-    account_balance DOUBLE NOT NULL
+    account_balance DOUBLE NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 INSERT INTO USERS (id, user_name, mobile_number, address, account_balance)
 VALUES (1, 'Kiran', '9123456789', 'Bangalore, India', 2500.00);
@@ -94,7 +96,7 @@ INSERT INTO USERS (id, user_name, mobile_number, address, account_balance)
 VALUES (2, 'Kumar', '9988776655', 'San Francisco, USA', 3200.75);
 
 CREATE TABLE PAYMENT (
-    id BIGINT NOT NULL AUTO_INCREMENT,
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
     user_id BIGINT,
     user_name VARCHAR(100) NOT NULL,
     mobile_number VARCHAR(10) NOT NULL,
@@ -102,5 +104,6 @@ CREATE TABLE PAYMENT (
     movie_name VARCHAR(200) NOT NULL,
     payment_type VARCHAR(10) NOT NULL,
     amount_credited DOUBLE NOT NULL,
-    PRIMARY KEY (id)
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
