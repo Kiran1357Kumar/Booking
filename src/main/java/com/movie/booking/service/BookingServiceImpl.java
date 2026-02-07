@@ -2,7 +2,6 @@ package com.movie.booking.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.movie.booking.entity.City;
 import com.movie.booking.entity.Language;
+import com.movie.booking.entity.Movies;
 import com.movie.booking.model.CitiesResponse;
 import com.movie.booking.model.LanguageResponse;
 import com.movie.booking.repository.CityRepository;
 import com.movie.booking.repository.LanguageRepository;
+import com.movie.booking.repository.MoviesRepository;
 
 @Service("bookingService")
 public class BookingServiceImpl implements BookingService {
@@ -23,6 +24,9 @@ public class BookingServiceImpl implements BookingService {
 	
 	@Autowired
 	private LanguageRepository languageRepository;
+	
+	@Autowired
+	private MoviesRepository moviesRepository;
 	
 	@Override
 	public List<CitiesResponse> getCitiesAndLanguages() {
@@ -48,13 +52,18 @@ public class BookingServiceImpl implements BookingService {
 				citiesResponse.setLanguages(languages);
 				resultList.add(citiesResponse);
 			}
-			
 			return resultList;
 		}else {
 			return null; //Need to add Exception
 		}
 		
 		
+	}
+
+	@Override
+	public List<Movies> getTheatersList(String cityId, String languageId) {
+		List<Movies> movieList =	moviesRepository.findAllByCityIdAndLanguageId(cityId, languageId);
+		return movieList;
 	}
 
 }
