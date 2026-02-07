@@ -2,6 +2,7 @@ package com.movie.booking.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -39,8 +40,11 @@ public class Theater {
 	@Column(name = "show_date")
 	private LocalDate showDate;
 	
+	@Column(name = "movie_theater_code", nullable = false, length = 20)
+    private String movieTheaterCode;
+	
 	@Column(name = "show_time")
-    private LocalDateTime localDateTime;
+    private LocalTime showTime;
 	
 	@CreationTimestamp
 	@Column(name = "created_at", nullable = false, updatable = false)
@@ -134,15 +138,21 @@ public class Theater {
 		this.showDate = showDate;
 	}
 
-	public LocalDateTime getLocalDateTime() {
-		return localDateTime;
+	public LocalTime  getShowTime() {
+		return showTime;
 	}
 
-	public void setLocalDateTime(LocalDateTime localDateTime) {
-		this.localDateTime = localDateTime;
+	public void setShowTime(LocalTime showTime) {
+		this.showTime = showTime;
 	} 
-	
-	
-	
+
+	public String getMovieTheaterCode() {
+		return movieTheaterCode;
+	}
+
+	public void setMovieTheaterCode(String movieTheaterCode) {
+		this.movieTheaterCode = movieTheaterCode;
+	}
+
 	
 }

@@ -6,6 +6,7 @@ public class TheaterResponse {
 	
 	 private long movieId;
 	 private String movieName;
+	 private String movieTheaterCode;
 	 private List<ShowTimes> showTimes;
 	 
 	 public long getMovieId() {
@@ -30,6 +31,14 @@ public class TheaterResponse {
 
 	 public void setMovieId(long movieId) {
 		 this.movieId = movieId;
+	 }
+
+	 public String getMovieTheaterCode() {
+		 return movieTheaterCode;
+	 }
+
+	 public void setMovieTheaterCode(String movieTheaterCode) {
+		 this.movieTheaterCode = movieTheaterCode;
 	 }
 	 
 	 

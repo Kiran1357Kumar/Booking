@@ -16,6 +16,6 @@ public interface BookingService {
 
 	TheaterResponse getShowTimeList(long cityId, long languageId, long movieId);
 
-	TheaterResponse paymentProcess(PaymentRequest paymentRequest);
+	String paymentProcess(PaymentRequest paymentRequest);
 
 }

@@ -1,7 +1,10 @@
 package com.movie.booking.controller;
 
+import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,17 +23,14 @@ import com.movie.booking.service.BookingService;
 @RequestMapping("/api/bookings")
 public class BookingController {
 	
+	private static final Logger log = LoggerFactory.getLogger(BookingController.class);
+
     private final BookingService bookingService;
 
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
     }
 
-    @GetMapping("/test")
-    public String test() {
-    	return "SUCCESS";
-    }
-    
     @GetMapping("/cities")
     public ResponseEntity<List<CitiesResponse>> getCities() {
     	List<CitiesResponse> response = bookingService.getCitiesAndLanguages();
@@ -52,17 +52,15 @@ public class BookingController {
     }
     
     @PostMapping("/payments")
-    public ResponseEntity<TheaterResponse> paymentProcess(@RequestBody PaymentRequest paymentRequest ) {
-    	TheaterResponse  showDetails  = bookingService.paymentProcess(paymentRequest);
-    	 return ResponseEntity.ok(showDetails);
+    public ResponseEntity<String> paymentProcess(@RequestBody PaymentRequest paymentRequest ) {
+    	log.info("Inside BookingController - Request start !! " +new Date()+ " time: "+new Date().getTime());
+
+    	String  paymentMessage  = bookingService.paymentProcess(paymentRequest);
+    	
+    	log.info("Inside BookingController - Request start !! " +new Date()+ " time: "+new Date().getTime());
+
+    	 return ResponseEntity.ok(paymentMessage);
     }
-    
-//    @PostMapping("/book")
-//    public ResponseEntity<String> bookTickets(
-//            @RequestBody BookingRequest request) {
-//
-//        String response = bookingService.bookTickets(request);
-//        return ResponseEntity.ok(response);
-//    }
+ 
     
 }

@@ -1,7 +1,5 @@
 package com.movie.booking.model;
 
-import java.util.List;
-
 public class ShowTimes {
 	
 	private long availableSeats;
