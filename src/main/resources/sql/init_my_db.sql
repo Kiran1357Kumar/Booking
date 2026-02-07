@@ -58,3 +58,24 @@ INSERT INTO MOVIES (CITY_ID, LANGUAGE_ID, MOVIE_NAME, MOVIE_DURATION, MOVIE_RATI
 VALUES (1, 4, 'Idiots', '2h 20m', '8.6', 'INOX', 'PVR006', 'M G Road', '560028');
 INSERT INTO MOVIES (CITY_ID, LANGUAGE_ID, MOVIE_NAME, MOVIE_DURATION, MOVIE_RATING, MOVIE_THEATER, MOVIE_THEATER_CODE, AREA, AREA_CODE) 
 VALUES (1, 4, 'Dhoom', '2h 15m', '7.2', 'PVR', 'PVR007', 'Gandhi NAgar', '560029');
+
+
+CREATE TABLE THEATER (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    city_id BIGINT,
+    language_id BIGINT,
+    movie_id BIGINT,
+    movie_name VARCHAR(100) NOT NULL,
+    available_seats BIGINT,
+    show_date DATE,
+    show_time TIMESTAMP,
+    movie_price DOUBLE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+INSERT INTO THEATER (city_id, language_id, movie_id, movie_name, available_seats, show_date, show_time, movie_price) 
+VALUES (1, 1, 1, 'RajaKumara', 100, '2026-02-11', '2026-02-10 1:30:00', 200.00);
+INSERT INTO THEATER (city_id, language_id, movie_id, movie_name, available_seats, show_date, show_time, movie_price) 
+VALUES (1, 1, 1, 'RajaKumara', 150, '2026-02-11', '2026-02-10 2:30:00', 200.00);
+INSERT INTO THEATER (city_id, language_id, movie_id, movie_name, available_seats, show_date, show_time, movie_price) 
+VALUES (1, 1, 1, 'RajaKumara', 120, '2026-02-11', '2026-02-10 3:30:00', 200.00);
