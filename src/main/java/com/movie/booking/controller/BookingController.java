@@ -19,6 +19,8 @@ import com.movie.booking.model.PaymentRequest;
 import com.movie.booking.model.TheaterResponse;
 import com.movie.booking.service.BookingService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/bookings")
 public class BookingController {
@@ -52,7 +54,7 @@ public class BookingController {
     }
     
     @PostMapping("/payments")
-    public ResponseEntity<String> paymentProcess(@RequestBody PaymentRequest paymentRequest ) {
+    public ResponseEntity<String> paymentProcess(@Valid @RequestBody PaymentRequest paymentRequest ) {
     	log.info("Inside BookingController - Request start !! " +new Date()+ " time: "+new Date().getTime());
 
     	String  paymentMessage  = bookingService.paymentProcess(paymentRequest);
