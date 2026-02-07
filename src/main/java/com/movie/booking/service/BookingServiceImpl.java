@@ -21,6 +21,7 @@ import com.movie.booking.enums.PaymentTypes;
 import com.movie.booking.exception.ResourceNotFoundException;
 import com.movie.booking.model.CitiesResponse;
 import com.movie.booking.model.LanguageResponse;
+import com.movie.booking.model.MovieResponse;
 import com.movie.booking.model.PaymentRequest;
 import com.movie.booking.model.ShowTimes;
 import com.movie.booking.model.TheaterResponse;
@@ -91,16 +92,32 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public List<Movies> getTheatersList(String cityId, String languageId) throws ResourceNotFoundException {
+	public List<MovieResponse> getTheatersList(String cityId, String languageId) throws ResourceNotFoundException {
 		log.info("Inside BookingServiceImpl - getTheatersList : " + cityId + " and " + languageId);
 
 		List<Movies> movieList = moviesRepository.findAllByCityIdAndLanguageId(cityId, languageId);
 		if (movieList.isEmpty() || movieList.size() == 0) {
 			throw new ResourceNotFoundException("No movies in this City !!");
 		}
+		List<MovieResponse> movieResponseList = createMovieResponseList(movieList);
 		log.info("Inside BookingServiceImpl - getTheatersList : " + movieList.size());
 
-		return movieList;
+		return movieResponseList;
+	}
+
+	private List<MovieResponse> createMovieResponseList(List<Movies> movieList) {
+		List<MovieResponse> responseList = new ArrayList<>();
+		for(Movies movie : movieList) {
+			MovieResponse movieResponse = new MovieResponse();
+			movieResponse.setCityId(movie.getCityId());
+			movieResponse.setMovieId(movie.getId());
+			movieResponse.setLanguageId(movie.getLanguageId());
+			movieResponse.setMovieName(movie.getMovieName());
+			movieResponse.setMovieDuration(movie.getMovieDuration());
+			movieResponse.setRating(movie.getMovieRating());
+			responseList.add(movieResponse);
+		}
+		return responseList;
 	}
 
 	@Override

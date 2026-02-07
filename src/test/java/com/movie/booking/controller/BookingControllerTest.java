@@ -17,9 +17,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.movie.booking.entity.Movies;
 import com.movie.booking.model.CitiesResponse;
 import com.movie.booking.model.LanguageResponse;
+import com.movie.booking.model.MovieResponse;
 import com.movie.booking.model.PaymentRequest;
 import com.movie.booking.model.ShowTimes;
 import com.movie.booking.model.TheaterResponse;
@@ -61,9 +61,12 @@ class BookingControllerTest {
 
     @Test
     void getTheatersList_success() throws Exception {
-        Movies movie = new Movies();
-        movie.setId(1L);
+    	MovieResponse movie = new MovieResponse();
+        movie.setCityId(1L);
         movie.setMovieName("RajaKumara");
+        movie.setLanguageId(1L);
+        movie.setRating("7.8");
+        movie.setMovieDuration("2:40");
 
         when(bookingService.getTheatersList("1", "1"))
                 .thenReturn(List.of(movie));

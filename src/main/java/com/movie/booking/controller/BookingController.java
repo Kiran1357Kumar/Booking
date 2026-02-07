@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.movie.booking.entity.Movies;
 import com.movie.booking.model.CitiesResponse;
+import com.movie.booking.model.MovieResponse;
 import com.movie.booking.model.PaymentRequest;
 import com.movie.booking.model.TheaterResponse;
 import com.movie.booking.service.BookingService;
@@ -40,9 +40,9 @@ public class BookingController {
     }
     
     @GetMapping("/theaters")
-    public ResponseEntity<List<Movies>> getTheatersList(@RequestParam("city_id") String cityId, 
+    public ResponseEntity<List<MovieResponse>> getTheatersList(@RequestParam("city_id") String cityId, 
     		@RequestParam("language_id") String languageId ) {
-    	List<Movies> movieList  = bookingService.getTheatersList(cityId, languageId);
+    	 List<MovieResponse> movieList  = bookingService.getTheatersList(cityId, languageId);
     	 return ResponseEntity.ok(movieList);
     }
     

@@ -1,7 +1,12 @@
 package com.movie.booking.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -20,6 +25,7 @@ import com.movie.booking.entity.Payment;
 import com.movie.booking.entity.Theater;
 import com.movie.booking.entity.User;
 import com.movie.booking.exception.ResourceNotFoundException;
+import com.movie.booking.model.MovieResponse;
 import com.movie.booking.model.PaymentRequest;
 import com.movie.booking.repository.CityRepository;
 import com.movie.booking.repository.LanguageRepository;
@@ -85,7 +91,7 @@ class BookingServiceImplTest {
         when(moviesRepository.findAllByCityIdAndLanguageId("1", "1"))
                 .thenReturn(List.of(movie));
 
-        List<Movies> result = bookingService.getTheatersList("1", "1");
+        List<MovieResponse> result = bookingService.getTheatersList("1", "1");
 
         assertFalse(result.isEmpty());
     }
